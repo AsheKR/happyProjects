@@ -14,10 +14,16 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT_DIR = os.path.dirname(BASE_DIR)
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 DJANGO_SECRET_DIR = os.path.join(ROOT_DIR, '.django_secrets')
 
 STATIC_URL = '/static/'
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = os.path.join(BASE_DIR, '.static/')
+
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_JSON = json.load(open(os.path.join(DJANGO_SECRET_DIR, 'secret.json')))
@@ -60,7 +66,9 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            TEMPLATES_DIR,
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
